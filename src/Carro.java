@@ -18,6 +18,14 @@ public class Carro {
         return tanque.getCombustivelDisponivel();
     }
 
+    public void setMotor(TipoCombustivel tipoCombustivel, int consumoMotor) {
+        motor = new Motor(tipoCombustivel, consumoMotor);
+    }
+
+    public void setTanque(TipoCombustivel tipoCombustivel, int capacidadeTanque) {
+        tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
+    }
+
     // Retorna a quantidade efetivamente abastecida
     public int abastece(TipoCombustivel tipoCombustivel, int quantidade) {
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
