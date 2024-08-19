@@ -10,6 +10,12 @@ public class Carro {
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
     }
 
+    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoGasolina, int consumoAlcool, int capacidadeTanque) {
+        this.modelo = modelo;
+        motor = new Motor(tipoCombustivel, consumoGasolina, consumoAlcool);
+        tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
+    }
+
     public String getModelo() {
         return modelo;
     }

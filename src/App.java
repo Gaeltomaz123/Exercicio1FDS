@@ -6,6 +6,7 @@ public class App {
         Carro utilitario = new Carro("Utilitario", TipoCombustivel.DIESEL, 5, 70);
         Carro suv = new Carro("SUV", TipoCombustivel.GASOLINA, 8, 55);
         suv.setTanque(TipoCombustivel.FLEX, 55);
+        Carro suvFlex = new Carro("SUVFlex", TipoCombustivel.FLEX, 8, 6, 65);
 
         System.out.println("Tipos de veiculos:");
         System.out.println(basico);

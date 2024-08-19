@@ -9,6 +9,12 @@ public class Motor {
         this.consumo = consumo;
     }
 
+    public Motor(TipoCombustivel tipoMotor, int consumoGasolina, int consumoAlcool) {
+        this.tipoMotor = tipoMotor;
+        this.consumo = consumoGasolina;
+    }
+
+
     public int getConsumo() {
         return this.consumo;
     }
