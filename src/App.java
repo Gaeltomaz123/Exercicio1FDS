@@ -7,6 +7,7 @@ public class App {
         Carro suv = new Carro("SUV", TipoCombustivel.GASOLINA, 8, 55);
         suv.setTanque(TipoCombustivel.FLEX, 55);
         Carro suvFlex = new Carro("SUVFlex", TipoCombustivel.FLEX, 8, 6, 65);
+        Carro econo = new Carro("Economico", TipoCombustivel.GASOLINA, 20, 55);
 
         System.out.println("Tipos de veiculos:");
         System.out.println(basico);
@@ -68,5 +69,34 @@ public class App {
         System.out.println("\nViajando com o carro suvflex");
         suvFlex.viaja(100);
         System.out.println(suvFlex);
+
+        // Econo
+        System.out.println("\n\n----------------");
+        System.out.println("\nAbastencendo carro economico com gasolina");
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        System.out.println(econo);
+        System.out.println("\nViajando com o carro economico");
+        econo.viaja(1100);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1100);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1100);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1100);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 30);
+        econo.viaja(600);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 50);
+        econo.viaja(190);
+        System.out.println(econo);
     }
 }

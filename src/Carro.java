@@ -46,6 +46,7 @@ public class Carro {
                 return 0;
             }
         }
+
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
         if (capacidadeLivre < quantidade) {
             tanque.abastece(tipoCombustivel, capacidadeLivre);
@@ -68,6 +69,9 @@ public class Carro {
 
     // Retorna true se conseguiu viajar
     public boolean viaja(int distancia) {
+        motor.atualizaQuilometrosRodados(distancia); //Atualizando a quantidade de quilometros rodados
+        motor.atualizaConsumoPLitro();
+        
         if (verificaSePodeViajar(distancia) >= distancia) {
             motor.percorre(distancia);
             int combustivelNecessario = combustivelNecessarioLogica(distancia);

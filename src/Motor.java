@@ -5,6 +5,8 @@ public class Motor {
     private int consumoGasolina;
     private int consumoAlcool;
     private int quilometragem;
+    private int quilometrosRodados = 0;
+    private int quilometrosEcono = 5000;
 
     public Motor(TipoCombustivel tipoMotor, int consumo) {
         this.tipoMotor = tipoMotor;
@@ -51,6 +53,21 @@ public class Motor {
 
     public void percorre(int distancia) {
         quilometragem += distancia;
+    }
+
+    public int getQuilometrosRodados(){
+        return this.quilometrosRodados;
+    }
+
+    public void atualizaQuilometrosRodados(int quilometrosViajados){
+        this.quilometrosRodados += quilometrosViajados;
+    }
+
+    public void atualizaConsumoPLitro(){
+        if (this.quilometrosRodados > quilometrosEcono && this.consumo > 10){
+            this.consumo--;
+            this.quilometrosEcono += 5000;
+        } 
     }
 
     @Override
