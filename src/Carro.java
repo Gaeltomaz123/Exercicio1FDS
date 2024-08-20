@@ -38,11 +38,13 @@ public class Carro {
         if(combustivel_atual == null) {
             combustivel_atual = tipoCombustivel;
         }
-        if(motor.getTipoMotor() == TipoCombustivel.FLEX && (tipoCombustivel == TipoCombustivel.GASOLINA || tipoCombustivel == TipoCombustivel.ALCOOL)) {
+        if((motor.getTipoMotor() == TipoCombustivel.FLEX && tanque.getTipoCombustivel() == TipoCombustivel.FLEX) && (tipoCombustivel == TipoCombustivel.GASOLINA || tipoCombustivel == TipoCombustivel.ALCOOL)) {
             combustivel_atual = tipoCombustivel;
         } else {
-            System.out.println("\nAVISO: Não é possível abastecer este carro com " + tipoCombustivel + "\n");
-            return 0;
+            if(combustivel_atual != tipoCombustivel) {
+                System.out.println("\nAVISO: Não é possível abastecer este carro com " + tipoCombustivel + "\n");
+                return 0;
+            }
         }
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
         if (capacidadeLivre < quantidade) {
