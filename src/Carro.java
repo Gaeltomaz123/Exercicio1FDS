@@ -96,10 +96,12 @@ public class Carro {
                 combustivelNecessario = combustivelNecessarioLogica(distancia);
                 tanque.gasta(combustivelNecessario);
                 motor.atualizaConsumoPLitro();
+            }else{
+                motor.percorre(distancia);
+                combustivelNecessario = combustivelNecessarioLogica(distancia);
+                tanque.gasta(combustivelNecessario);
             }
-            motor.percorre(distancia);
-            combustivelNecessario = combustivelNecessarioLogica(distancia);
-            tanque.gasta(combustivelNecessario);
+            
             return true;
         }
         return false;
