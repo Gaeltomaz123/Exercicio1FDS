@@ -75,7 +75,8 @@ public class App {
         System.out.println("\nAbastencendo carro economico com gasolina");
         econo.abastece(TipoCombustivel.GASOLINA, 55);
         System.out.println(econo);
-        System.out.println("\nViajando com o carro economico");
+
+        System.out.println("\nViajando 5000Km com o carro economico");
         econo.viaja(1100);
         System.out.println(econo);
 
@@ -89,14 +90,40 @@ public class App {
 
         econo.abastece(TipoCombustivel.GASOLINA, 55);
         econo.viaja(1100);
-        System.out.println(econo);
-
-        econo.abastece(TipoCombustivel.GASOLINA, 30);
-        econo.viaja(600);
         System.out.println(econo);
 
         econo.abastece(TipoCombustivel.GASOLINA, 50);
-        econo.viaja(190);
+        econo.viaja(600);
         System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        System.out.println(econo);
+
+        System.out.println("Diminuindo consumo e andando mais 5000 KM com o carro economico");
+        econo.viaja(1000);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1000);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1000);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(1000);
+        System.out.println(econo);
+
+        econo.abastece(TipoCombustivel.GASOLINA, 50);
+        econo.viaja(500);
+        System.out.println(econo);
+
+        System.out.println("Ultrapassando marca de 10000 Km de quilometragem");
+        System.out.println("Carro anda 500 Km com consumo de 19/l e 180 Km com 18/l");
+        econo.abastece(TipoCombustivel.GASOLINA, 55);
+        econo.viaja(680);
+        System.out.println(econo);
+
     }
 }

@@ -11,7 +11,8 @@ public class Carro {
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
     }
 
-    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoGasolina, int consumoAlcool, int capacidadeTanque) {
+    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoGasolina, int consumoAlcool,
+            int capacidadeTanque) {
         this.modelo = modelo;
         motor = new Motor(tipoCombustivel, consumoGasolina, consumoAlcool);
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
@@ -35,13 +36,14 @@ public class Carro {
 
     // Retorna a quantidade efetivamente abastecida
     public int abastece(TipoCombustivel tipoCombustivel, int quantidade) {
-        if(combustivel_atual == null) {
+        if (combustivel_atual == null) {
             combustivel_atual = tipoCombustivel;
         }
-        if((motor.getTipoMotor() == TipoCombustivel.FLEX && tanque.getTipoCombustivel() == TipoCombustivel.FLEX) && (tipoCombustivel == TipoCombustivel.GASOLINA || tipoCombustivel == TipoCombustivel.ALCOOL)) {
+        if ((motor.getTipoMotor() == TipoCombustivel.FLEX && tanque.getTipoCombustivel() == TipoCombustivel.FLEX)
+                && (tipoCombustivel == TipoCombustivel.GASOLINA || tipoCombustivel == TipoCombustivel.ALCOOL)) {
             combustivel_atual = tipoCombustivel;
         } else {
-            if(combustivel_atual != tipoCombustivel) {
+            if (combustivel_atual != tipoCombustivel) {
                 System.out.println("\nAVISO: Não é possível abastecer este carro com " + tipoCombustivel + "\n");
                 return 0;
             }
@@ -68,29 +70,50 @@ public class Carro {
     }
 
     // Retorna true se conseguiu viajar
+    // Possui toda a lógica para caso a quilometragem ultrapasse a marca de
+    // diminuição do consumo
     public boolean viaja(int distancia) {
-        motor.atualizaQuilometrosRodados(distancia); //Atualizando a quantidade de quilometros rodados
-        motor.atualizaConsumoPLitro();
-        
+
         if (verificaSePodeViajar(distancia) >= distancia) {
+            int distanciaAMais, distanciaOk, combustivelNecessario = 0;
+
+            if ((motor.getQuilometragem() + distancia) > motor.getQuilometrosEcono() && getModelo() == "Economico") {
+                distanciaAMais = (motor.getQuilometragem() + distancia) - motor.getQuilometrosEcono();
+                distanciaOk = distancia - distanciaAMais;
+
+                motor.percorre(distanciaOk);
+                combustivelNecessario = combustivelNecessarioLogica(distanciaOk);
+                tanque.gasta(combustivelNecessario);
+                motor.atualizaConsumoPLitro();
+
+                motor.percorre(distanciaAMais);
+                combustivelNecessario = combustivelNecessarioLogica(distanciaAMais);
+                tanque.gasta(combustivelNecessario);
+                motor.atualizaConsumoPLitro();
+
+            } else if (getModelo() == "Economico") {
+                motor.percorre(distancia);
+                combustivelNecessario = combustivelNecessarioLogica(distancia);
+                tanque.gasta(combustivelNecessario);
+                motor.atualizaConsumoPLitro();
+            }
             motor.percorre(distancia);
-            int combustivelNecessario = combustivelNecessarioLogica(distancia);
+            combustivelNecessario = combustivelNecessarioLogica(distancia);
             tanque.gasta(combustivelNecessario);
             return true;
         }
         return false;
     }
 
-    // Função criada para verificar se o carro é FLEX e com qual combustível foi abastecido
+    // Função criada para verificar se o carro é FLEX e com qual combustível foi
+    // abastecido
     public int combustivelNecessarioLogica(int distancia) {
         if (motor.getTipoMotor() == TipoCombustivel.FLEX && tanque.getTipoCombustivel() == TipoCombustivel.FLEX) {
             if (combustivel_atual == TipoCombustivel.GASOLINA) {
                 return motor.combustivelNecessarioGasolina(distancia);
-            }
-            else if (combustivel_atual == TipoCombustivel.ALCOOL) {
+            } else if (combustivel_atual == TipoCombustivel.ALCOOL) {
                 return motor.combustivelNecessarioAlcool(distancia);
-            }
-            else {
+            } else {
                 return 0;
             }
         }
@@ -101,7 +124,8 @@ public class Carro {
     public String toString() {
         // Se for abastecido exibir qual combustível o carro está utilizando
         if (combustivel_atual != null) {
-            return "Carro:\n  Modelo=" + modelo + "\n  Motor=" + motor + "\n  Tanque=" + tanque + "\n  Utilizando o Combustível=" + combustivel_atual;
+            return "Carro:\n  Modelo=" + modelo + "\n  Motor=" + motor + "\n  Tanque=" + tanque
+                    + "\n  Utilizando o Combustível=" + combustivel_atual;
         }
         return "Carro:\n  Modelo=" + modelo + "\n  Motor=" + motor + "\n  Tanque=" + tanque;
     }
